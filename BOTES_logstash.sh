@@ -143,7 +143,7 @@ function templateput()
     while true; do
 		case $EScloud in
 			[Yy]* )	
-				-f $PWD/template.json ] && wget -q --show-progress https://botes.s3-us-west-1.amazonaws.com/botes-index-mapping/template.json -P "$PWD/"
+				[ ! -f $PWD/template.json ] && wget -q --show-progress https://botes.s3-us-west-1.amazonaws.com/botes-index-mapping/template.json -P "$PWD/"
 				curl -u $EScloudauth -XPUT "$EScloudhost/_template/botes" -H 'Content-Type: application/json' -d @$PWD/template.json
 				break;;
 			[Nn]* ) break;;
