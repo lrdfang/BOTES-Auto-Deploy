@@ -92,7 +92,8 @@ function elasticgather()
 		case $EScloud in
 			[Yy]* ) 
 				read -p "What is your Elastic Cloud ID: " EScloudid
-				read -p "What is your Elastic Cloud Auth: [(username):(password)]" EScloudauth
+				read -p "What is your Elastic Cloud Auth [(username):(password)]: " EScloudauth
+				read -p "What is your Elastic Cloud Host URL: " EScloudhost
 				break;;
 			[Nn]* )
 				Echo "Logstash Input pipeline will be created. This Version can not support automatic configuration of non-cloud elasticsearch. Please ensure that proper logstash.yml and pipeline/output.conf are included."
@@ -121,12 +122,30 @@ function outputgen()
 		esac
 	done
 }	
+function 
+
+function templateput()
+{
+    while true; do
+		case $EScloud in
+			[Yy]* )	
+				-f $PWD/template.json ] && wget -q --show-progress https://botes.s3-us-west-1.amazonaws.com/botes-index-mapping/template.json -P "$PWD/"
+				curl -u $EScloudauth -XPUT "$EScloudhost/_template/botes" -H 'Content-Type: application/json' -d @$PWD/template.json
+				break;;
+			[Nn]* ) break;;
+		esac
+	done
+}	
+function
+
+
+elasticgather
 dircheck
 pipelineimport
 datazipped
 extract
-elasticgather
 logstashyml
 outputgen
-
+templateput
+docker pull docker.elastic.co/logstash/logstash:7.7.1
 docker run --rm -it -v $PWD/upload:/botes/data/ -v $PWD/logstash.yml:/usr/share/logstash/config/logstash.yml -v $PWD/pipeline/:/usr/share/logstash/pipeline/ docker.elastic.co/logstash/logstash:7.7.1
