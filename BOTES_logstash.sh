@@ -1,4 +1,19 @@
 #!/bin/bash
+
+############################################
+#########BOTES-Auto-Deploy Script###########
+############################################
+# Made by Julian Hupp
+############################################
+# This script will auto deploy the BOTES
+# Data set assembled and built by Sebastien 
+# Lehuede via a Logstash Docker container.
+# Used to ease deployment for Training 
+# Purposes
+############################################
+# V 1.0 - First build for ES Cloud Installs
+############################################
+
 function dircheck()
 {
 	[ ! -d $PWD/pipeline ] && mkdir pipeline
@@ -147,5 +162,6 @@ extract
 logstashyml
 outputgen
 templateput
+
 docker pull docker.elastic.co/logstash/logstash:7.7.1
 docker run --rm -it -v $PWD/upload:/botes/data/ -v $PWD/logstash.yml:/usr/share/logstash/config/logstash.yml -v $PWD/pipeline/:/usr/share/logstash/pipeline/ docker.elastic.co/logstash/logstash:7.7.1
