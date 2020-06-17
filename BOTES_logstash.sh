@@ -137,7 +137,6 @@ function outputgen()
 		esac
 	done
 }	
-function 
 
 function templateput()
 {
