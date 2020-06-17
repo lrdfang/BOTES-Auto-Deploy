@@ -150,7 +150,6 @@ function templateput()
 		esac
 	done
 }	
-function
 
 
 elasticgather
