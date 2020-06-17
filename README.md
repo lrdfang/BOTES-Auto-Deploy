@@ -1,4 +1,4 @@
-#BOTES-Auto-Deploy
+# BOTES-Auto-Deploy
 
 This is an auto-deploy script for the Boss of the Elastic SOC data set for use in training environments. The BOTES data set is assembled and built by Sebastien Lehuede and documented on his BOTES GitBook documentation. This script just expands upon his work and simplifies deployment.
 
